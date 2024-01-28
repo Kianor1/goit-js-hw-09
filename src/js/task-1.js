@@ -1,6 +1,4 @@
-import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm';
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
+import simpleLightbox from 'simplelightbox';
 
 const images = [
   {
@@ -68,30 +66,24 @@ const images = [
   },
 ];
 
-function createGalleryItems(images) {
-  const gallery = document.querySelector('.gallery');
+const pictures = document.querySelector('.gallery');
 
-  const items = images.map(image => {
-    const listItem = document.createElement('li');
-    listItem.classList.add('gallery-item');
+pictures.addEventListener('click', e => {
+  e.preventDefault();
+});
 
-    const link = document.createElement('a');
-    link.classList.add('gallery-link');
-    link.href = image.original;
+const createGallery = images
+  .map(image => {
+    return `<li class="gallery-item">
+        <a class="gallery-link" href='${image.original}'>
+          <img class="gallery-image" src='${image.preview}' alt='${image.description}' />
+        </a>
+        <p>${image.description}</p>
+      </li>`;
+  })
+  .join('');
 
-    const img = document.createElement('img');
-    img.classList.add('gallery-image');
-    img.src = image.preview;
-    img.dataset.source = image.original;
-    img.alt = image.description;
+pictures.innerHTML = createGallery;
+console.log(createGallery);
 
-    link.appendChild(img);
-    listItem.appendChild(link);
-
-    return listItem;
-  });
-
-  gallery.append(...items);
-}
-
-createGalleryItems(images);
+new simpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
