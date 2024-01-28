@@ -1,5 +1,4 @@
 @import url('./reset.css');
-@import 'simplelightbox/dist/simple-lightbox.min.css';
 
 body {
   width: 100vw;
@@ -31,4 +30,8 @@ body {
 .gallery-image:hover {
   width: 376px;
   height: 208px;
+}
+
+.sl-wrapper {
+  background-color: rgba(46, 47, 66, 0.80);
 }
