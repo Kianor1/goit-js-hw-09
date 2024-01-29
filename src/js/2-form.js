@@ -1,6 +1,6 @@
-const STOREGE_KEY = 'feedback-form-state';
+const STORAGE_KEY = 'feedback-form-state';
 
-let obj = JSON.parse(localStorage.getItem(STOREGE_KEY)) || {};
+let obj = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 
 const formEl = document.querySelector('.feedback-form');
 
@@ -14,19 +14,19 @@ function onInput(e) {
 
   obj[name] = value;
 
-  localStorage.setItem(STOREGE_KEY, JSON.stringify(obj));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
 }
 
 function onSubmit(e) {
   e.preventDefault();
-  const emailValue = e.target.elements.email.value;
-  const messageValue = e.target.elements.message.value;
+  const emailValue = e.target.elements.email.value.trim();
+  const messageValue = e.target.elements.message.value.trim();
 
   if (!emailValue || !messageValue) return alert('zapovny obo*jazkove pole');
   console.log(obj);
   obj = {};
-  localStorage.removeItem(STOREGE_KEY);
-  e.target.reset;
+  localStorage.removeItem(STORAGE_KEY);
+  e.target.reset();
 }
 
 function renderPage() {
